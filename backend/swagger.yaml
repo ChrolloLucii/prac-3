@@ -1,0 +1,122 @@
+openapi: 3.0.0
+info:
+  title: Admin API для интернет-магазина
+  version: "1.0"
+  description: API для управления товарами в интернет-магазине.
+servers:
+  - url: http://localhost:4000
+paths:
+  /products:
+    get:
+      summary: Получение списка товаров
+      responses:
+        '200':
+          description: Список товаров
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      summary: Создание нового товара
+      requestBody:
+        description: Объект товара для создания
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '201':
+          description: Товар создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /products/{id}:
+    get:
+      summary: Получение товара по Id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Объект товара
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Товар не найден
+    put:
+      summary: Обновление товара
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Объект товара для обновления
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '200':
+          description: Обновленный объект товара
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Товар не найден
+    delete:
+      summary: Удаление товара
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Товар удален
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+        description:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+    ProductInput:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+        description:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+      required:
+        - name
+        - price
