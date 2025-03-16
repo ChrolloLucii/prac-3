@@ -17,6 +17,9 @@ git clone https://github.com/ChrolloLucii/prac-3.git
    npm i # установка зависимостей
    node server.js
    ```
-4. Админ панель с доступными эндпоинтами и запросами доступна по ссылке
+4. Доступные эндпоинты и запросы доступна по ссылке:
 > http://localhost:4000/api-docs/
-
+5. sandbox с graphQL доступен по ссылке:
+> https://localhost:4000/graphql
+6. Админ панель для управления товарами и чатом с админской стороны доступна по ссылке (клиент):
+> https://localhost:3000/admin
